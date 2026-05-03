@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitish T S | Premium Portfolio</title>
+    <!-- Fonts & Icons (Updated to newest version for the X logo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* --- CORE VARIABLES --- */
+        :root {
+            --bg-dark: #050505;
+            --glass-bg: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8f9fa;
+            --text-muted: #a0aab2;
+            --accent: #00e5ff;
+            --accent-glow: rgba(0, 229, 255, 0.2);
+            --secondary: #b052fd;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.05), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(176, 82, 253, 0.05), transparent 25%);
+        }
+
+        h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 100px 20px; }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 {
+            font-size: 3rem;
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        .section-header .line {
+            width: 60px; height: 4px;
+            background: linear-gradient(to right, var(--accent), var(--secondary));
+            margin: 10px auto 0; border-radius: 2px;
+        }
+
+        /* --- GLASSMORPHISM BASE --- */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .glass-panel:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.1);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            position: relative;
+            background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,1)), 
+                        url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070') center/cover;
+            text-align: center;
+        }
+        .hero-content {
+            background: rgba(15, 15, 15, 0.65); backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255,255,255,0.1);
+            padding: 60px 40px; border-radius: 32px; box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            max-width: 850px; width: 90%; animation: slideUp 1.2s ease forwards;
+        }
+        
+        .hero h1 {
+            font-size: clamp(3.5rem, 6vw, 5.5rem); font-weight: 700; letter-spacing: -2px; margin-bottom: 5px;
+            background: linear-gradient(135deg, #fff, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p { font-size: 1.3rem; color: var(--text-muted); margin-bottom: 30px; font-weight: 300; }
+        
+        /* Dynamic Tags Fix */
+        .hero-tags { display: flex; gap: 5px; justify-content: center; margin-bottom: 40px; align-items: center; }
+        .hero-tag-text {
+            font-size: 1.5rem; font-weight: 500; font-family: 'Space Grotesk', sans-serif;
+            color: var(--text-main);
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .typed-cursor {
+            font-size: 1.5rem; color: var(--accent); font-weight: 300;
+        }
+        
+        /* Inline Navigation */
+        .hero-nav {
+            display: flex; gap: 25px; justify-content: center; flex-wrap: wrap;
+            background: rgba(0, 0, 0, 0.4); padding: 15px 35px; border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08); box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .hero-nav a {
+            color: var(--text-main); text-decoration: none; font-size: 1.05rem; font-weight: 500;
+            transition: all 0.3s ease; font-family: 'Space Grotesk', sans-serif;
+        }
+        .hero-nav a:hover { color: var(--accent); transform: translateY(-2px); }
+        
+        .scroll-indicator {
+            position: absolute; bottom: 30px; color: rgba(255,255,255,0.5); font-size: 2rem;
+            animation: bounce 2s infinite; text-decoration: none; transition: color 0.3s ease;
+        }
+        .scroll-indicator:hover { color: var(--accent); }
+        
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
+
+        /* --- INTERACTIVE TABS (ABOUT ME) --- */
+        .about-tabs {
+            display: flex; gap: 15px; margin-bottom: 30px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: transparent; color: var(--text-muted); border: none; font-size: 1.2rem;
+            font-family: 'Space Grotesk', sans-serif; font-weight: 600; cursor: pointer; 
+            padding: 8px 20px; transition: all 0.3s ease; border-radius: 12px;
+        }
+        .tab-btn:hover { color: var(--text-main); background: rgba(255,255,255,0.05); }
+        .tab-btn.active {
+            background: rgba(0, 229, 255, 0.1); color: var(--accent);
+            box-shadow: inset 0 0 10px rgba(0, 229, 255, 0.2);
+        }
+        .tab-content { display: none; animation: fadeInTab 0.5s ease forwards; }
+        .tab-content.active { display: block; }
+        
+        @keyframes fadeInTab { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .about-content-inner { padding: 0 10px; }
+        .about-content-inner p { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 20px; text-align: justify; }
+        
+        .goal-list { list-style: none; padding-top: 10px; }
+        .goal-list li { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 20px; font-size: 1.1rem; color: var(--text-muted); }
+        .goal-list i { color: var(--secondary); font-size: 1.3rem; margin-top: 4px; }
+        .goal-list strong { color: var(--text-main); display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; padding-top: 10px; }
+        .info-item { background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border: 1px solid var(--glass-border); }
+        .info-item p { margin-bottom: 0; font-size: 1.1rem; }
+        .info-item span { display: block; color: var(--accent); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600; }
+
+        /* --- LAYOUT 1: TIMELINE (Education) --- */
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; padding-left: 40px; border-left: 2px dashed rgba(255,255,255,0.1); }
+        .timeline-item { position: relative; margin-bottom: 50px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -48px; top: 0; width: 14px; height: 14px;
+            background: var(--accent); border-radius: 50%; box-shadow: 0 0 15px var(--accent-glow);
+        }
+        .timeline-content { padding: 30px; }
+        .timeline-content h3 { color: var(--accent); font-size: 1.8rem; margin-bottom: 10px; }
+
+        /* --- LAYOUT 2: BENTO BOX (Skills) --- */
+        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; grid-auto-rows: minmax(180px, auto); }
+        .bento-item { padding: 30px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+        .bento-item i { font-size: 2.5rem; margin-bottom: 15px; color: var(--accent); }
+        .bento-item h4 { font-size: 1.2rem; margin-bottom: 10px; }
+        .bento-item p { font-size: 0.9rem; color: var(--text-muted); }
+        .bento-main { grid-column: span 2; grid-row: span 2; background: linear-gradient(135deg, rgba(20,20,20,0.8), rgba(0, 229, 255, 0.05)); }
+        .bento-wide { grid-column: span 2; }
+        @media(max-width: 900px) {
+            .bento-grid { grid-template-columns: repeat(2, 1fr); }
+            .bento-main { grid-column: span 2; grid-row: auto; }
+            .bento-wide { grid-column: span 2; }
+        }
+
+        /* --- LAYOUT 3: PROJECTS --- */
+        .project-showcase {
+            position: relative; height: 500px; border-radius: 24px; overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070') center/cover;
+            display: flex; align-items: center; margin-bottom: 30px;
+        }
+        .project-card-main {
+            margin-left: 5%; max-width: 500px; padding: 40px; background: rgba(10, 10, 10, 0.85); border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .project-card-main h3 { font-size: 2.2rem; color: #fff; margin-bottom: 15px; }
+        
+        .ongoing-projects { display: grid; grid-template-columns: 1fr; gap: 30px; }
+        @media(min-width: 768px) { .ongoing-projects { grid-template-columns: 1fr 1fr; } }
+        
+        .project-card-small { padding: 40px; display: flex; flex-direction: column; justify-content: flex-start; }
+        .project-status {
+            display: inline-block; padding: 6px 14px; border-radius: 30px; font-size: 0.85rem; font-weight: 600;
+            margin-bottom: 20px; width: fit-content;
+        }
+        .status-completed { background: rgba(176, 82, 253, 0.15); color: var(--secondary); border: 1px solid rgba(176, 82, 253, 0.3); }
+        .status-ongoing { background: rgba(0, 229, 255, 0.15); color: var(--accent); border: 1px solid rgba(0, 229, 255, 0.3); }
+        .project-subject { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; font-weight: 600;}
+        .project-card-small h3 { font-size: 1.6rem; color: #fff; margin-bottom: 15px; }
+
+        /* --- LAYOUT 4: HOBBIES --- */
+        .hobby-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; align-items: stretch; }
+        .hobby-item { padding: 40px; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+        .hobby-item i { font-size: 3.5rem; color: var(--secondary); margin-bottom: 20px; }
+
+        /* --- CONTACT SECTION (WITH PHOTO) --- */
+        .contact-split {
+            display: grid; grid-template-columns: 1fr; gap: 40px;
+            background: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 24px; padding: 50px;
+        }
+        @media (min-width: 900px) { .contact-split { grid-template-columns: 1.2fr 1fr; align-items: center; } }
+        
+        .profile-box { text-align: center; display: flex; justify-content: center; align-items: center; }
+        .profile-photo {
+            width: 280px; height: 280px; border-radius: 50%; object-fit: cover;
+            border: 8px solid rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow);
+        }
+        
+        .contact-details { display: flex; flex-direction: column; gap: 25px; }
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .contact-card { background: rgba(255,255,255,0.03); padding: 25px; border-radius: 16px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+        .contact-card i { font-size: 2rem; color: var(--accent); margin-bottom: 15px; }
+        .contact-card h4 { font-size: 1.2rem; margin-bottom: 5px; }
+        .contact-card p, .contact-card a { color: var(--text-muted); text-decoration: none; font-size: 1.1rem; }
+        
+        .social-row { display: flex; gap: 20px; justify-content: center; font-size: 1.8rem; margin-top: 10px; }
+        .social-row a { color: var(--text-muted); transition: color 0.3s; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; }
+        .social-row a:hover { color: var(--accent); background: rgba(0, 229, 255, 0.1); transform: translateY(-3px); }
+
+        /* --- ANIMATIONS --- */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(60px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-on-scroll { opacity: 0; transform: translateY(50px); transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--glass-border); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Nitish T S</h1>
+            <p>A digital portfolio showcasing my journey in engineering, technical projects, and continuous learning.</p>
+            
+            <div class="hero-tags">
+                <span class="hero-tag-text" id="typed-text"></span>
+            </div>
+
+            <nav class="hero-nav">
+                <a href="#about-me">About Me</a>
+                <a href="#about">Journey</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#hobbies">Hobbies</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+        <a href="#about-me" class="scroll-indicator"><i class="fas fa-chevron-down"></i></a>
+    </header>
+
+    <!-- INTERACTIVE ABOUT ME SECTION -->
+    <section class="container" id="about-me">
+        <div class="section-header animate-on-scroll">
+            <h2>About Me</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="glass-panel animate-on-scroll timeline-content">
+            
+            <!-- Tab Buttons -->
+            <div class="about-tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'background')">Background</button>
+                <button class="tab-btn" onclick="openTab(event, 'goals')">Goals & Mission</button>
+                <button class="tab-btn" onclick="openTab(event, 'info')">Personal Info</button>
+            </div>
+
+            <!-- Tab Content: Background -->
+            <div id="background" class="tab-content active about-content-inner">
+                <p>I'm <strong>Nitish T S</strong>, a 1st-year Electronics and Communication Engineering student at Bangalore Institute of Technology. My curiosity in electronics started long before college — with broken gadgets, dismantled remotes, and a genuine obsession with how things <em>actually</em> work.</p>
+                <p>From my first blinking LED to writing my first working C program — every small win has pushed me deeper into understanding circuits, signals, and how software talks to real hardware. I love how each challenge pushes me to learn new technologies and think precisely about problem-solving — no guesswork, just methodical engineering.</p>
+            </div>
+
+            <!-- Tab Content: Goals -->
+            <div id="goals" class="tab-content about-content-inner">
+                <ul class="goal-list">
+                    <li><i class="fas fa-bullseye"></i> <div><strong>Short Term</strong> Score well in semester exams and build a strong foundation in ECE.</div></li>
+                    <li><i class="fas fa-rocket"></i> <div><strong>Mid Term</strong> Complete meaningful projects, improve coding skills, and explore internships.</div></li>
+                    <li><i class="fas fa-graduation-cap"></i> <div><strong>Long Term</strong> Pursue higher studies in a field I'm passionate about.</div></li>
+                    <li><i class="fas fa-compass"></i> <div><strong>Mission</strong> Keep learning, stay curious, and grow one step at a time.</div></li>
+                </ul>
+            </div>
+
+            <!-- Tab Content: Info -->
+            <div id="info" class="tab-content about-content-inner">
+                <div class="info-grid">
+                    <div class="info-item"><span>Name</span><p>Nitish T S</p></div>
+                    <div class="info-item"><span>Degree</span><p>B.E. Electronics & Communication Engineering</p></div>
+                    <div class="info-item"><span>Year</span><p>1st Year (2025 – 2029)</p></div>
+                    <div class="info-item"><span>Location</span><p>Karnataka, India</p></div>
+                    <div class="info-item"><span>Email</span><p>nitishts@gmail.com</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 1: ABOUT & TIMELINE -->
+    <section class="container" id="about">
+        <div class="section-header animate-on-scroll">
+            <h2>Journey & Milestones</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item animate-on-scroll">
+                <div class="glass-panel timeline-content">
+                    <h3>Bangalore Institute of Technology</h3>
+                    <p>I am currently pursuing my Bachelor of Engineering (B.E.) in Electronics and Communication Engineering. Through this rigorous program, I am developing a deep understanding of core electronic principles, communication systems, and modern technological frameworks.</p>
+                </div>
+            </div>
+            
+            <div class="timeline-item animate-on-scroll">
+                <div class="glass-panel timeline-content">
+                    <h3>KCET Excellence</h3>
+                    <p>My foundational engineering journey began by successfully securing a highly competitive KCET rank of 11,500. This crucial milestone validated my rigorous preparation in mathematics and sciences, ultimately paving the way for my admission into the prestigious Electronics and Communication Engineering branch at BIT.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item animate-on-scroll">
+                <div class="glass-panel timeline-content">
+                    <h3>Academic & Athletic Foundations</h3>
+                    <p>Prior to engineering, I maintained a strong and consistent academic record, passing my 12th standard with 93% and my 10th standard with 90%. Beyond the classroom, I am also a dedicated athlete, demonstrating my commitment to physical excellence by winning first place in the High Jump during my school's annual sports day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: SKILLS (BENTO BOX) -->
+    <section class="container" id="skills">
+        <div class="section-header animate-on-scroll">
+            <h2>Core Competencies</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="bento-grid">
+            <div class="glass-panel bento-item bento-main animate-on-scroll">
+                <i class="fas fa-microchip"></i>
+                <h4>Systems & Programming</h4>
+                <p>My technical foundation is built on robust programming languages essential for hardware and software integration. I am highly proficient in C programming for low-level system interactions, Python for high-level logic and automation, Linux for development environments, and TCL for scripting within electronic design automation.</p>
+            </div>
+            <div class="glass-panel bento-item animate-on-scroll">
+                <i class="fab fa-python"></i>
+                <h4>Python & C</h4>
+                <p>Algorithm design and logical implementation.</p>
+            </div>
+            <div class="glass-panel bento-item animate-on-scroll">
+                <i class="fab fa-linux"></i>
+                <h4>Linux OS</h4>
+                <p>Command line operations and environments.</p>
+            </div>
+            <div class="glass-panel bento-item bento-wide animate-on-scroll">
+                <i class="fas fa-network-wired"></i>
+                <h4>Non-Technical Capabilities</h4>
+                <p>Beyond code, I excel in critical problem-solving and strategic project management. I thrive in environments that require analyzing complex bottlenecks and leading collaborative teams from initial concept to successful deployment.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PROJECTS -->
+    <section class="container" id="projects">
+        <div class="section-header animate-on-scroll">
+            <h2>Featured Work</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="project-showcase animate-on-scroll">
+            <div class="project-card-main">
+                <div class="project-status status-completed">Deployed / Completed</div>
+                <h3>Library Seat Availability Tracker</h3>
+                <p>Working closely with a dedicated team, we designed a comprehensive website and application aimed at solving the common issue of space management within academic environments. The system tracks and manages seat availability in real-time, blending frontend design and backend logic to optimize space utilization.</p>
+            </div>
+        </div>
+
+        <div class="ongoing-projects">
+            <div class="glass-panel project-card-small animate-on-scroll">
+                <div class="project-status status-ongoing"><i class="fas fa-spinner fa-spin" style="margin-right: 5px;"></i> In Progress</div>
+                <div class="project-subject">Fundamentals of Electronics & Comm.</div>
+                <h3>Battery Level Indicator</h3>
+                <p>Collaborating heavily within a team setting to engineer a hardware battery level indicator utilizing <strong>BJTs and Diodes</strong>. My contributions focus heavily on precise circuit design and component integration to ensure accurate voltage threshold detection and reliable display outputs.</p>
+            </div>
+
+            <div class="glass-panel project-card-small animate-on-scroll">
+                <div class="project-status status-ongoing"><i class="fas fa-spinner fa-spin" style="margin-right: 5px;"></i> In Progress</div>
+                <div class="project-subject">Project Based Learning</div>
+                <h3>Plant Moisture Detector</h3>
+                <p>Working dynamically as part of a group to develop a sensor-based plant moisture level detector. I am significantly involved in the sensor calibration and logical mapping, bridging the critical gap between raw environmental data and actionable electronic alerts.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: HOBBIES -->
+    <section class="container" id="hobbies">
+        <div class="section-header animate-on-scroll">
+            <h2>Beyond The Screen</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="hobby-grid">
+            <div class="glass-panel hobby-item animate-on-scroll">
+                <i class="fas fa-futbol"></i>
+                <h4>Field Sports</h4>
+                <p>I am an avid sports enthusiast, regularly playing both football and cricket. These team sports help me stay physically fit while reinforcing the value of teamwork and communication.</p>
+            </div>
+            <div class="glass-panel hobby-item animate-on-scroll">
+                <i class="fas fa-gamepad"></i>
+                <h4>Tactical Gaming</h4>
+                <p>I am a passionate gamer, frequently diving into titles like eFootball and Clash Royale. These digital battlegrounds serve as a fantastic way to sharpen quick decision-making.</p>
+            </div>
+            <div class="glass-panel hobby-item animate-on-scroll">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <h4>Technical Workshops</h4>
+                <p>I actively attend technical and skill-based workshops to continuously improve my knowledge base, stay updated with emerging technologies, and refine my practical engineering skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: CONTACT (WITH PHOTO) -->
+    <section class="container" id="contact">
+        <div class="section-header animate-on-scroll">
+            <h2>Get In Touch</h2>
+            <div class="line"></div>
+        </div>
+        
+        <div class="animate-on-scroll contact-split">
+            <div class="profile-box">
+                <!-- User Profile Photo -->
+                <img src="1000044734.jpg" alt="Nitish T S - Profile Photo" class="profile-photo">
+            </div>
+            <div class="contact-details">
+                <p style="font-size: 1.1rem; color: var(--text-muted); text-align: justify; margin-bottom: 10px;">Feel free to reach out regarding potential collaborations, questions about my projects, or networking opportunities within the engineering field. I am always open to connecting.</p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h4>Phone</h4>
+                        <p>8867643599</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h4>Email</h4>
+                        <p><a href="mailto:nitishts@gmail.com">nitishts@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="social-row">
+                    <!-- GitHub -->
+                    <a href="https://github.com/nitishts-byte" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    <!-- LinkedIn -->
+                    <a href="https://www.linkedin.com/in/nitish-ts-2a8551386?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- X (Formerly Twitter) using updated FontAwesome class -->
+                    <a href="https://x.com/TsNitish37324" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nitish T S. Built for Essentials of Information Technology.</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 1. Scroll Animations Setup
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('.animate-on-scroll').forEach((el) => observer.observe(el));
+
+        // 2. Interactive Tabs Logic for "About Me"
+        function openTab(evt, tabName) {
+            // Hide all content blocks
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove 'active' class from all buttons
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show current tab, and add 'active' to clicked button
+            document.getElementById(tabName).style.display = "block";
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
+    <!-- TYPED.JS LIBRARY AND Hero TEXT SCRIPT (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var typed = new Typed('#typed-text', {
+                strings: ['Electronics & Communication Engineering Student', 'Hardware Integrator', 'Tech Enthusiast', 'System Innovator'],
+                typeSpeed: 70,    
+                backSpeed: 40,    
+                backDelay: 1200,  
+                startDelay: 500,  
+                loop: true        
+            });
+        });
+    </script>
+</body>
+</html>
